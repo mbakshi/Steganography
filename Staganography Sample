@@ -1,0 +1,62 @@
+Steganography
+=============
+
+BE Final Year Project Sample Code
+
+  this.conpass.addCaretListener(this);
+    this.ispass.addActionListener(this);
+    this.danalyze.addActionListener(this);
+    this.dcancel.addActionListener(this);
+    this.dpass.addCaretListener(this);
+
+    add(this.con);
+
+    new FileDrop(System.out, this.dfhe, false, new FileDrop.Listener() {
+      public void filesDropped(File[] paramAnonymousArrayOfFile) {
+        for (int i = 0; i < paramAnonymousArrayOfFile.length; i++)
+          try
+          {
+            String str1 = paramAnonymousArrayOfFile[i].getCanonicalPath().toLowerCase();
+            int j = 0;
+            String[] arrayOfString = { ".jpg", ".gif", ".png", ".bmp", ".tif", ".jpeg", ".mpg", ".mpeg", ".vob", ".mp4", ".3gp", "mkv", "avi", "flv", ".mp3", ".wav", ".wave", ".ogg", ".mka", ".wma", ".rm", ".pdf" };
+
+            for (String str3 : arrayOfString)
+            {
+              if (str1.endsWith(str3))
+              {
+                j = 1;
+                break;
+              }
+            }
+            if (j != 0)
+            {
+              RandomAccessFile fd = new RandomAccessFile(new File(paramAnonymousArrayOfFile[i].getCanonicalPath()), "rwd");
+              if ((((RandomAccessFile)fd).length() >= 10 * mainframe.this.amessage.getText().length()) && (((RandomAccessFile)fd).length() > 200L)) {
+                mainframe.this.filename.setText(paramAnonymousArrayOfFile[i].getCanonicalPath());
+                mainframe.this.enext.setEnabled(true);
+                mainframe.this.ifname = paramAnonymousArrayOfFile[i].getName();
+                mainframe.this.ifpath = paramAnonymousArrayOfFile[i].getCanonicalPath();
+                mainframe.this.ofname = ("ss_" + mainframe.this.ifname);
+                mainframe.this.ofpath = (FileSystemView.getFileSystemView().getDefaultDirectory() + "\\" + mainframe.this.ofname);
+                System.out.println(mainframe.this.ifpath);
+                System.out.println(mainframe.this.ofpath);
+              }
+              else
+              {
+                String str2 = "File size is too less compared to message. Please try another file.";
+                JOptionPane.showMessageDialog(null, str2, "SteganoSmart", 1);
+              }
+            }
+            else
+            {
+              String str3 = "File not supported. Try to add any Audio, Video, Image or Pdf File.";
+              JOptionPane.showMessageDialog(null, str3, "SteganoSmart", 1);
+            }
+          }
+          catch (IOException localIOException)
+          {
+          }
+      }
+    });
+    new FileDrop(System.out, this.dfhd, false, new FileDrop.Listener() {
+      public void filesDropped(File[] paramAnonymousArrayOfFile) {
